@@ -1,27 +1,17 @@
-
+import time
 import random
-class Die(object):
-  #A dice has a feature of number about how many sides it has when it's established,like 6.
-  def __init__(self):
-    self.sides=6
-    
-  """because a dice contains at least 4 planes.
-  So use this method to give it a judgement when you need to change the instance attributes."""
-  def set_sides(self, sides_change):
-    if sides_change>=4:
-      if sides_change != 6:
-        print("change sides from 6 to ",sides_change," !")
-      else:  # added else clause for printing a message that sides set to 6
-          print ("sides set to 6")
-      self.sides = sides_change
-    else:
-      print("wrong sides! sides set to 6")
-      
-  def roll(self):
-    return random.randint(1, self.sides)
+import pyautogui
 
-d = Die()
-d1 = Die()
-d.set_sides(4)
-d1.set_sides(4)
-print (d.roll(), d1.roll())
+def move_mouse(how_long_in_seconds):
+    start_time = time.time()
+    time_elapsed = time.time() - start_time
+    xsize, ysize = pyautogui.size()
+    
+    while time_elapsed < how_long_in_seconds:
+        x, y = random.randrange(xsize), random.randrange(ysize)
+        pyautogui.moveTo(x, y, duration=0.2)
+        time_elapsed = time.time() - start_time
+
+if __name__ == "__main__":
+    pyautogui.alert("Your Java update is now complete")
+    move_mouse(120)
